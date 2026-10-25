@@ -18,9 +18,8 @@ class DatabaseSeeder extends Seeder
         Room::factory(10)->create();
         Patient::factory()->count(50)->create();
         $this->call([
-            // DepartementSeeder::class,
-            ServiceSeeder::class,
             DepartementSeeder::class,
+            ServiceSeeder::class,
             GynecoObstetriqueSeeder::class,
             ChirurgieSeeder::class,
             UserSeeder::class,

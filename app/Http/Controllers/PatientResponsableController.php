@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PatientResponsable;
+use App\Http\Requests\PatientResponsableRequest;
 use App\Models\Patient;
+use App\Models\PatientResponsable;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class PatientResponsableController extends Controller
 {
     public function index()
     {
         $patientResponsables = PatientResponsable::with(['patient', 'user'])->get();
+
         return view('patient_responsables.index', compact('patientResponsables'));
     }
+
     public function create()
     {
-        $patients = Patient::all();
-        $users = User::all();
-        return view('patient_responsables.create', compact('patients', 'users'));
-    }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'user_id' => 'required|exists:users,id',
-            'role' => 'required|string|max:255',
+        return view('patient_responsables.create', [
+            'patients' => Patient::orderBy('nom')->get(),
+            'users' => User::orderBy('name')->get(),
         ]);
+    }
 
-        PatientResponsable::create($request->all());
+    public function store(PatientResponsableRequest $request)
+    {
+        PatientResponsable::create($request->validated());
 
         return redirect()->route('patient_responsables.index')->with('success', 'Responsable ajouté avec succès.');
     }
-    public function show($id)
+
+    public function show(PatientResponsable $patientResponsable)
     {
-        $patientResponsable = PatientResponsable::with(['patient', 'user'])->findOrFail($id);
+        $patientResponsable->load(['patient', 'user']);
+
         return view('patient_responsables.show', compact('patientResponsable'));
     }
-    public function edit($id)
-    {
-        $patientResponsable = PatientResponsable::findOrFail($id);
-        $patients = Patient::all();
-        $users = User::all();
-        return view('patient_responsables.edit', compact('patientResponsable', 'patients', 'users'));
-    }
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'user_id' => 'required|exists:users,id',
-            'role' => 'required|string|max:255',
-        ]);
 
-        $patientResponsable = PatientResponsable::findOrFail($id);
-        $patientResponsable->update($request->all());
+    public function edit(PatientResponsable $patientResponsable)
+    {
+        return view('patient_responsables.edit', [
+            'patientResponsable' => $patientResponsable,
+            'patients' => Patient::orderBy('nom')->get(),
+            'users' => User::orderBy('name')->get(),
+        ]);
+    }
+
+    public function update(PatientResponsableRequest $request, PatientResponsable $patientResponsable)
+    {
+        $patientResponsable->update($request->validated());
 
         return redirect()->route('patient_responsables.index')->with('success', 'Responsable mis à jour avec succès.');
     }
-    public function destroy($id)
+
+    public function destroy(PatientResponsable $patientResponsable)
     {
-        $patientResponsable = PatientResponsable::findOrFail($id);
         $patientResponsable->delete();
 
         return redirect()->route('patient_responsables.index')->with('success', 'Responsable supprimé avec succès.');

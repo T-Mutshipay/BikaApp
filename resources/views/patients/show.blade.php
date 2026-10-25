@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <p><span class="font-medium text-gray-600">Nom :</span> {{ $patient->nom }}</p>
                 <p><span class="font-medium text-gray-600">Prénom :</span> {{ $patient->prenom }}</p>
-                <p><span class="font-medium text-gray-600">Date de naissance :</span> {{ $patient->date_naissance }}</p>
+                <p><span class="font-medium text-gray-600">Date de naissance :</span> {{ $patient->date_naissance->format('Y-m-d') }}</p>
                 <p><span class="font-medium text-gray-600">Genre :</span> {{ $patient->genre }}</p>
                 <p><span class="font-medium text-gray-600">Adresse :</span> {{ $patient->adresse }}</p>
                 <p><span class="font-medium text-gray-600">Téléphone :</span> {{ $patient->telephone }}</p>
@@ -32,10 +32,10 @@
                     <tbody>
                         @foreach($patient->hospitalisations as $hospitalisation)
                             <tr class="hover:bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->service_id }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->room_id }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->date_admission }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->date_sorite }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->service?->nom }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->room?->nom }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->date_admission->format('Y-m-d') }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $hospitalisation->date_sortie?->format('Y-m-d') ?? '—' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

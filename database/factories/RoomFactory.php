@@ -19,8 +19,8 @@ class RoomFactory extends Factory
         return [
             'nom' => $this->faker->name,
             'type'=> $this->faker->word,
-            'capacite'=> $this->faker->randomDigit,
-            'disponibilite'=> $this->faker->boolean
+            'capacite'=> $this->faker->numberBetween(1, 6),
+            'disponibilite'=> true
         ];
     }
 }

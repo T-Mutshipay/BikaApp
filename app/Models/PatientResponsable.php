@@ -15,7 +15,7 @@ class PatientResponsable extends Model
     ];
     
     public function  patient(){
-        return $this->BelongsTo(Patient::class);
+        return $this->belongsTo(Patient::class);
     }
     public function user(){
         return $this->belongsTo(User::class);

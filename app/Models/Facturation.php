@@ -18,6 +18,23 @@ class Facturation extends Model
         'statut'
     ];
 
+    public const STATUT_EN_ATTENTE = 'En attente';
+    public const STATUT_PAYEE = 'Payée';
+    public const STATUT_ANNULEE = 'Annulée';
+
+    public const STATUTS = [
+        self::STATUT_EN_ATTENTE,
+        self::STATUT_PAYEE,
+        self::STATUT_ANNULEE,
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'montant_total' => 'decimal:2',
+        ];
+    }
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);

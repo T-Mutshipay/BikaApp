@@ -29,13 +29,13 @@
                         </div>
                         <div class="w-1/2">
                             <label for="poids" class="block mb-2 text-sm font-medium text-gray-900">Poids (kg)</label>
-                            <input type="number" id="poids" name="poids" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <input type="number" step="0.1" min="0.3" max="500" id="poids" name="poids" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         </div>
                     </div>
                     <div class="flex space-x-4">
                         <div class="w-1/2">
                             <label for="taille" class="block mb-2 text-sm font-medium text-gray-900">Taille (cm)</label>
-                            <input type="number" id="taille" name="taille" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <input type="number" step="0.1" min="20" max="250" id="taille" name="taille" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         </div>
                         <div class="w-1/2">
                             <label for="temperature" class="block mb-2 text-sm font-medium text-gray-900">Température (°C)</label>
@@ -44,12 +44,12 @@
                     </div>
                     <div class="flex space-x-4">
                         <div class="w-1/2">
-                            <label for="tension" class="block mb-2 text-sm font-medium text-gray-900">Tension (mmHg)</label>
-                            <input type="text" id="tension" name="tension" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <label for="tension" class="block mb-2 text-sm font-medium text-gray-900">Tension systolique (mmHg)</label>
+                            <input type="number" step="1" min="40" max="300" id="tension" name="tension" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         </div>
                         <div class="w-1/2">
                             <label for="pouls" class="block mb-2 text-sm font-medium text-gray-900">Pouls (bpm)</label>
-                            <input type="number" id="pouls" name="pouls" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            <input type="number" min="20" max="300" id="pouls" name="pouls" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                         </div>
                     </div>
                     {{-- <div>

@@ -1,4 +1,7 @@
 <x-app-layout>
+    @if ($errors->any())
+        <x-flash />
+    @endif
     <div class="max-w-md mx-auto my-4">
         <!-- Message de succès -->
         @if (session('success'))
@@ -122,7 +125,7 @@
                     <tr>
                         <td class="  px-4 py-2">{{$patient->nom}}</td>
                         <td class="  px-4 py-2">{{$patient->prenom}}</td>
-                        <td class="  px-4 py-2">{{$patient->date_naissance}}</td>
+                        <td class="  px-4 py-2">{{ $patient->date_naissance->format('Y-m-d') }}</td>
                         <td class="  px-4 py-2">{{$patient->genre}}</td>
                         <td class="  px-4 py-2">{{$patient->adresse}}</td>
                         <td class="  px-4 py-2">{{$patient->telephone}}</td>

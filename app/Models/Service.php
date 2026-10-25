@@ -16,9 +16,9 @@ class Service extends Model
     ];
 
     public function departement(){
-        return $this->BelongsTo(Departement::class);
+        return $this->belongsTo(Departement::class);
     }
-    public function hospitalisation(){
+    public function hospitalisations(){
         return $this->hasMany(Hospitalisation::class);
     }
 }
