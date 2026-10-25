@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartementController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExamenController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
     // Patients et consultations
     Route::resource('patients', PatientController::class);
+    Route::resource('consultations', ConsultationController::class)
+        ->shallow()
+        ->only(['index', 'show']);
     Route::post('consultations/{patient}', [ConsultationController::class, 'store'])
         ->name('consultations.store');
 
@@ -45,8 +48,10 @@ Route::middleware('auth')->group(function () {
         ->parameters(['factures' => 'facturation'])
         ->except(['create', 'edit']);
 
+    Route::resource('examens', ExamenController::class)->only(['index']);
+
     // Utilisateurs (lecture seule pour l'instant, la gestion arrive à l'étape 2)
-    Route::resource('users', UserController::class)->only(['index']);
+    Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->middleware('role:Administrateur');
 });
 
 require __DIR__.'/auth.php';
